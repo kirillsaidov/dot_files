@@ -24,7 +24,7 @@ sudo apt update && sudo apt upgrade -y
 
 # install necessary command line utilities
 echo ">>> Installing command line utilities..."
-sudo apt install -y build-essential git vim htop neofetch curl wget apt-transport-https ca-certificates ffmpeg python3-pip python3-venv
+sudo apt install -y build-essential cmake git vim htop neofetch curl wget apt-transport-https ca-certificates ffmpeg python3-pip python3-venv
 
 # install apps
 echo "Installing relevant apps..."

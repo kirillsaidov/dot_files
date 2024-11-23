@@ -28,7 +28,7 @@ sudo apt install -y build-essential git vim htop neofetch curl wget apt-transpor
 
 # install apps
 echo "Installing relevant apps..."
-sudo apt install -y tilix audacity shotcut darktable
+sudo apt install -y tilix vlc audacity shotcut darktable
 
 # --- vscode
 wget -O vscode-linux.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"

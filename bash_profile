@@ -1,9 +1,9 @@
-# source bashrc
+# ~/.bash_profile
+
+# source .bashrc if it exists
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-# activate work_sshid
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/workd_sshid
-clear && neofetch;
+# export additional paths
+export PATH=$PATH:$HOME/myfiles/system/bin:$HOME/myfiles/system/scripts

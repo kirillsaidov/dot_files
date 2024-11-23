@@ -28,17 +28,20 @@ sudo apt install -y build-essential git vim htop neofetch curl wget apt-transpor
 
 # install apps
 echo "Installing relevant apps..."
-sudo apt install -y audacity tilix
+sudo apt install -y tilix audacity shotcut darktable
 
 # --- vscode
 wget -O vscode-linux.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
 sudo apt install ./vscode-linux.deb
-rm vscode-linux.deb
 
 # --- sublime text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt update && sudo apt install -y sublime-text
+
+# --- megasync
+wget -O megasync.deb https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megasync-xUbuntu_24.04_amd64.deb
+sudo apt install ./megasync.deb
 
 # --- docker
 if [ "$SKIP_DOCKER" -eq 0 ]; then
@@ -48,7 +51,7 @@ if [ "$SKIP_DOCKER" -eq 0 ]; then
     sudo chmod a+r /etc/apt/keyrings/docker.asc
     echo \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt update
     sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -71,12 +74,11 @@ if [ "$SKIP_MONGO" -eq 0 ]; then
     # install mongo with docker
     sudo docker pull mongodb/mongodb-community-server:latest
     sudo docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
-    docker update --restart unless-stopped $(docker ps -aqf "name=mongodb")
+    sudo docker update --restart unless-stopped $(sudo docker ps -aqf "name=mongodb")
 
     # install mongo compass
     wget -O mongo-compass.deb "https://downloads.mongodb.com/compass/mongodb-compass_1.44.7_amd64.deb"
     sudo apt install ./mongo-compass.deb
-    rm mongo-compass.deb
 fi
 
 # --- ollama
@@ -84,5 +86,6 @@ if [ "$SKIP_OLLAMA" -eq 0 ]; then
     curl -fsSL https://ollama.com/install.sh | sh
 fi
 
-
+# cleanup
+trap 'rm -f vscode-linux.deb megasync.deb mongo-compass.deb install.sh' EXIT
 

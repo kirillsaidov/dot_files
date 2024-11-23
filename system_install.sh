@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # setup variables
 HELP=${HELP:-0}
@@ -43,7 +43,7 @@ sudo apt update && sudo apt install -y sublime-text
 # --- megasync
 wget -O megasync.deb https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megasync-xUbuntu_24.04_amd64.deb
 sudo dpkg -i ./megasync.deb
-sudo apt install -f -y 
+sudo apt install -f -y
 
 # --- docker
 if [ "$SKIP_DOCKER" -eq 0 ]; then
@@ -58,7 +58,7 @@ if [ "$SKIP_DOCKER" -eq 0 ]; then
     sudo apt update
     sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     sudo usermod -aG docker $USER
-    
+
     # configure docker logs size
     sudo tee /etc/docker/daemon.json > /dev/null <<EOF
 {
@@ -81,7 +81,7 @@ if [ "$SKIP_MONGO" -eq 0 ]; then
     # install mongo compass
     wget -O mongo-compass.deb "https://downloads.mongodb.com/compass/mongodb-compass_1.44.7_amd64.deb"
     sudo dpkg -i ./mongo-compass.deb
-    sudo apt install -f -y 
+    sudo apt install -f -y
 fi
 
 # --- ollama
@@ -91,4 +91,3 @@ fi
 
 # cleanup
 trap 'rm -f vscode-linux.deb megasync.deb mongo-compass.deb install.sh' EXIT
-

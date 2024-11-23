@@ -32,7 +32,7 @@ sudo apt install -y tilix vlc audacity shotcut darktable
 
 # --- vscode
 wget -O vscode-linux.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-sudo apt install ./vscode-linux.deb
+sudo apt install -y ./vscode-linux.deb
 
 # --- sublime text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
@@ -41,7 +41,7 @@ sudo apt update && sudo apt install -y sublime-text
 
 # --- megasync
 wget -O megasync.deb https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megasync-xUbuntu_24.04_amd64.deb
-sudo apt install ./megasync.deb
+sudo apt install -y ./megasync.deb
 
 # --- docker
 if [ "$SKIP_DOCKER" -eq 0 ]; then
@@ -78,7 +78,7 @@ if [ "$SKIP_MONGO" -eq 0 ]; then
 
     # install mongo compass
     wget -O mongo-compass.deb "https://downloads.mongodb.com/compass/mongodb-compass_1.44.7_amd64.deb"
-    sudo apt install ./mongo-compass.deb
+    sudo apt install -y ./mongo-compass.deb
 fi
 
 # --- ollama

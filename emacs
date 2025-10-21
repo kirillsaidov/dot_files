@@ -5,6 +5,7 @@
 (setq-default indent-tabs-mode nil)
 (setq c-default-style "bsd"
       c-basic-offset 4)
+(setq make-backup-files nil)
 
 ;; Basic settings about UI & UX
 (menu-bar-mode 0)
